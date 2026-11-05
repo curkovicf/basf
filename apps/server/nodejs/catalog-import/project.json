@@ -1,0 +1,30 @@
+{
+  "name": "catalog-import",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/server/nodejs/catalog-import/src",
+  "projectType": "application",
+  "tags": ["platform:server", "type:app"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "webpack-cli build",
+        "args": ["node-env=production"]
+      },
+      "configurations": {
+        "development": {
+          "args": ["node-env=development"]
+        }
+      }
+    },
+    "run": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "cache": false,
+      "options": {
+        "command": "node dist/apps/catalog-import/main.js",
+        "cwd": "{workspaceRoot}"
+      }
+    }
+  }
+}

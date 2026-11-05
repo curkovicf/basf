@@ -1,0 +1,9 @@
+{
+  "name": "catalog-import",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Prisma CLI is a root devDependency and is not imported by any source file, but this image runs `prisma migrate deploy` before the import, so it is declared here and lands in the bundle's package.json.",
+  "dependencies": {
+    "prisma": "7.10.1"
+  }
+}
