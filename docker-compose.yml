@@ -1,0 +1,65 @@
+name: product-finder
+
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-finder}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-finder}
+      POSTGRES_DB: ${POSTGRES_DB:-product_finder}
+    ports:
+      - '${DB_PORT:-5544}:5432'
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  # One-shot: applies migrations, then imports the PIM export. Its own image, built from the
+  # catalog-import app; it carries the Prisma CLI so the API image does not have to. Safe to
+  # re-run:
+  #   docker compose run --rm seed
+  seed:
+    build:
+      context: .
+      dockerfile: apps/server/nodejs/catalog-import/Dockerfile
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-finder}:${POSTGRES_PASSWORD:-finder}@db:5432/${POSTGRES_DB:-product_finder}
+    volumes:
+      - ./data:/data:ro
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/server/nodejs/api/Dockerfile
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-finder}:${POSTGRES_PASSWORD:-finder}@db:5432/${POSTGRES_DB:-product_finder}
+      API_PORT: 3100
+      TRUST_PROXY: 1
+      REVIEW_RATE_LIMIT: ${REVIEW_RATE_LIMIT:-5}
+    healthcheck:
+      test: ['CMD-SHELL', "node -e \"fetch('http://localhost:3100/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\""]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    depends_on:
+      seed:
+        condition: service_completed_successfully
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/angular/finder/Dockerfile
+    ports:
+      - '${WEB_PORT:-8090}:80'
+    depends_on:
+      api:
+        condition: service_healthy
+
+volumes:
+  db-data:

@@ -1,0 +1,9 @@
+node_modules
+dist
+coverage
+.nx
+.angular
+.idea
+.env
+docs
+**/prisma/generated
