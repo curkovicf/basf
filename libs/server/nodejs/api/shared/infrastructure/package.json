@@ -1,0 +1,9 @@
+{
+  "name": "@pf/server-nodejs-api-shared-infrastructure",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Declares the runtime dependency of the generated Prisma client, which is gitignored and therefore invisible to Nx's import analysis. The app bundles' generated package.json files pick it up from here.",
+  "dependencies": {
+    "@prisma/client": "7.10.1"
+  }
+}

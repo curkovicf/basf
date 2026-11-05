@@ -1,0 +1,88 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "./generated"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ProductStatus {
+  ACTIVE
+  PHASE_OUT
+  DISCONTINUED
+}
+
+/// Owned by the PIM import. Everything except the rating_* columns is overwritten
+/// on each import; the rating_* columns are owned by the review flow.
+model Product {
+  id              Int           @id @default(autoincrement())
+  /// Stable business key from the PIM; used in public URLs.
+  sku             String        @unique
+  name            String
+  chemicalName    String        @map("chemical_name")
+  function        String
+  applicationArea String        @map("application_area")
+  region          String
+  certifications  String[]
+  status          ProductStatus
+  launchYear      Int?          @map("launch_year")
+  description     String
+  /// Lower-cased concatenation of the searchable fields, maintained by the import.
+  searchText      String        @map("search_text")
+  /// Set when the product disappears from the PIM export. The row stays so that
+  /// shared links and reviews keep working; cleared if the product comes back.
+  delistedAt      DateTime?     @map("delisted_at")
+  /// Denormalised so that sorting by rating does not aggregate reviews per request.
+  ratingCount     Int           @default(0) @map("rating_count")
+  ratingSum       Int           @default(0) @map("rating_sum")
+  /// 0 while there are no reviews, so that unrated products sort last via a plain index.
+  ratingAvg       Float         @default(0) @map("rating_avg")
+  createdAt       DateTime      @default(now()) @map("created_at")
+  updatedAt       DateTime      @default(now()) @updatedAt @map("updated_at")
+  reviews         Review[]
+
+  @@index([searchText(ops: raw("gin_trgm_ops"))], type: Gin, map: "products_search_text_trgm_idx")
+  @@index([certifications], type: Gin)
+  @@index([status, delistedAt])
+  @@index([name, sku])
+  @@index([ratingAvg(sort: Desc), ratingCount(sort: Desc), sku])
+  @@map("products")
+}
+
+model Review {
+  id         Int      @id @default(autoincrement())
+  productId  Int      @map("product_id")
+  authorName String   @map("author_name")
+  /// 1-5, enforced by a CHECK constraint in the migration as well as in the API.
+  rating     Int      @db.SmallInt
+  comment    String
+  createdAt  DateTime @default(now()) @map("created_at")
+  /// Restrict: user-generated content must never disappear as a side effect of catalogue changes.
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([productId, createdAt(sort: Desc)])
+  @@map("reviews")
+}
+
+enum ImportStatus {
+  SUCCEEDED
+  FAILED
+}
+
+/// Audit trail of imports; also the source of the "catalogue updated" timestamp.
+model ImportRun {
+  id         Int          @id @default(autoincrement())
+  source     String
+  status     ImportStatus
+  startedAt  DateTime     @map("started_at")
+  finishedAt DateTime     @default(now()) @map("finished_at")
+  /// Counts of rows read/inserted/updated/unchanged/delisted/rejected.
+  summary    Json
+  /// Row-level data quality issues, or the abort reason for a failed run.
+  issues     Json
+
+  @@index([status, finishedAt(sort: Desc)])
+  @@map("import_runs")
+}

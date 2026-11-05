@@ -1,0 +1,6 @@
+export enum EnvironmentVariables {
+  DATABASE_URL = 'DATABASE_URL',
+  API_PORT = 'API_PORT',
+  REVIEW_RATE_LIMIT = 'REVIEW_RATE_LIMIT',
+  TRUST_PROXY = 'TRUST_PROXY',
+}
