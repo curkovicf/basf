@@ -1,0 +1,58 @@
+<pf-search-bar [term]="searchTerm()" (termChange)="onSearchInput($event)" />
+
+<div class="layout">
+  @if (!isMobile() && result(); as current) {
+    <pf-filter-sidebar
+      [facets]="current.facets"
+      [query]="query()"
+      (toggled)="onToggle($event.group, $event.value)"
+      (cleared)="clearFilters()"
+    />
+  }
+
+  <section aria-label="Results" [attr.aria-busy]="loading()">
+    <pf-results-toolbar
+      [total]="result()?.total ?? null"
+      [sort]="result()?.sort ?? null"
+      [sortOptions]="sortOptions()"
+      [filterButton]="isMobile()"
+      [activeFilterCount]="activeFilterCount()"
+      (openFilters)="filtersOpen.set(true)"
+      (sortChange)="onSort($event)"
+    />
+
+    @if (activeChips().length > 0) {
+      <pf-active-filter-chips
+        [chips]="activeChips()"
+        (removed)="onToggle($event.group, $event.value)"
+      />
+    }
+
+    <pf-catalog-results
+      [result]="result()"
+      [loading]="loading()"
+      [failed]="failed()"
+      [hiddenDiscontinued]="hiddenDiscontinued()"
+      [canClearFilters]="activeFilterCount() > 0"
+      [page]="query().page"
+      [pageSize]="pageSize"
+      [compact]="isMobile()"
+      (retry)="retry()"
+      (showDiscontinued)="showDiscontinued()"
+      (clearFilters)="clearFilters()"
+      (pageChange)="onPage($event)"
+    />
+  </section>
+</div>
+
+@if (isMobile() && result(); as current) {
+  <pf-filter-drawer
+    [open]="filtersOpen()"
+    [facets]="current.facets"
+    [query]="query()"
+    [total]="current.total"
+    (openChange)="filtersOpen.set($event)"
+    (toggled)="onToggle($event.group, $event.value)"
+    (cleared)="clearFilters()"
+  />
+}

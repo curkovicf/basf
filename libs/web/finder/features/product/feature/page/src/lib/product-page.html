@@ -1,0 +1,73 @@
+<button pButton class="back" type="button" [text]="true" size="small" (click)="back()">
+  <i class="pi pi-arrow-left"></i>
+  Back to results
+</button>
+
+@switch (state()) {
+  @case ('loading') {
+    <div class="loading" aria-hidden="true">
+      <p-skeleton width="55%" height="2rem" />
+      <p-skeleton width="30%" height="1rem" />
+      <p-skeleton height="5rem" />
+      <p-skeleton height="7rem" />
+    </div>
+  }
+
+  @case ('not-found') {
+    <div class="state" animate.enter="pf-enter">
+      <span class="pi pi-compass" aria-hidden="true"></span>
+
+      <h1>We can't find this product</h1>
+      <p>The link may be wrong, or the product was never part of our catalogue.</p>
+      <a routerLink="/products">Browse all products</a>
+    </div>
+  }
+
+  @case ('error') {
+    <p-message severity="error" animate.enter="pf-enter">
+      We couldn't load this product. Please try again.
+    </p-message>
+  }
+
+  @case ('ready') {
+    @if (product(); as p) {
+      <article class="product" animate.enter="pf-enter">
+        <pf-availability-notice [status]="p.status" />
+
+        <pf-product-header [product]="p" (share)="share()" />
+
+        <pf-rating-badge [rating]="p.rating" />
+
+        <p class="description">{{ p.description }}</p>
+
+        <pf-product-details [product]="p" />
+      </article>
+
+      <section class="reviews" aria-labelledby="reviews-heading" animate.enter="pf-enter">
+        <h2 id="reviews-heading">
+          Customer reviews
+          <span class="total">{{ reviewTotal() }}</span>
+        </h2>
+
+        <pf-review-list
+          [reviews]="reviews()"
+          [loading]="loadingMoreReviews()"
+          [failed]="reviewsFailed()"
+          [hasMore]="hasMoreReviews()"
+          (retry)="loadReviews()"
+          (loadMore)="loadReviews()"
+        />
+
+        @if (p.acceptsReviews) {
+          <pf-review-form
+            [status]="reviewSubmit()"
+            [errorMessage]="reviewError()"
+            (submitted)="submitReview($event)"
+          />
+        } @else {
+          <p class="closed">Reviews are closed because this product is no longer sold.</p>
+        }
+      </section>
+    }
+  }
+}

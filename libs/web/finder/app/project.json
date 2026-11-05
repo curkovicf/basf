@@ -1,0 +1,13 @@
+{
+  "name": "web-finder-app",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/finder/app/src",
+  "projectType": "library",
+  "prefix": "pf",
+  "tags": [
+    "platform:web",
+    "type:app"
+  ],
+  "// targets": "to see all targets run: nx show project web-finder-app --web",
+  "targets": {}
+}

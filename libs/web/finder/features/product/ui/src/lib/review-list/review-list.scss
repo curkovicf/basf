@@ -1,0 +1,25 @@
+:host {
+  display: grid;
+  gap: 1rem;
+}
+
+.review-list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.none {
+  padding: 1.5rem 1rem;
+  background: var(--p-content-background);
+  border: 1px dashed var(--p-surface-300);
+  border-radius: var(--pf-radius);
+  color: var(--p-text-muted-color);
+  text-align: center;
+}
+
+.more {
+  justify-self: center;
+}

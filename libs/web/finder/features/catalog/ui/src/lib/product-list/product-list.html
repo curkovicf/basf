@@ -1,0 +1,15 @@
+@if (products(); as items) {
+  <ul class="product-list" [class.dimmed]="dimmed()">
+    @for (product of items; track product.sku; let i = $index) {
+      <li animate.enter="pf-enter" [style.--pf-i]="i">
+        <pf-product-card [product]="product" />
+      </li>
+    }
+  </ul>
+} @else {
+  <ul class="product-list" aria-hidden="true">
+    @for (placeholder of placeholders; track placeholder) {
+      <li><p-skeleton height="10rem" borderRadius="0.875rem" /></li>
+    }
+  </ul>
+}

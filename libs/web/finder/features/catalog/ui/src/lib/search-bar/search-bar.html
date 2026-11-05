@@ -1,0 +1,19 @@
+<h1>Find the right product</h1>
+<p class="lead">
+  Search the specialty chemicals catalogue by name, chemical, function, application area or SKU.
+</p>
+
+<p-iconfield>
+  <p-inputicon class="pi pi-search" />
+
+  <input
+    pInputText
+    type="search"
+    class="search-input"
+    placeholder="Search by name, function or SKU"
+    aria-label="Search products"
+    maxlength="100"
+    [value]="term()"
+    (input)="onInput($event)"
+  />
+</p-iconfield>

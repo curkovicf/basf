@@ -1,0 +1,20 @@
+<p-drawer
+  position="bottom"
+  styleClass="filter-drawer"
+  header=" "
+  [visible]="open()"
+  (visibleChange)="openChange.emit($event)"
+>
+  <pf-filter-panel
+    [facets]="facets()"
+    [query]="query()"
+    (toggled)="toggled.emit($event)"
+    (cleared)="cleared.emit()"
+  />
+
+  <ng-template #footer>
+    <button pButton type="button" [fluid]="true" (click)="openChange.emit(false)">
+      Show {{ total() }} results
+    </button>
+  </ng-template>
+</p-drawer>

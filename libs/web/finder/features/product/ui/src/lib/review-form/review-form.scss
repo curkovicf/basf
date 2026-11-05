@@ -1,0 +1,63 @@
+form {
+  // A signal form hands every control its raw validity, so PrimeNG would paint an empty,
+  // untouched field red. The red border is switched off here and back on per field (see
+  // `.field.invalid`) only once the form decides the error should be shown.
+  --p-inputtext-invalid-border-color: var(--p-inputtext-border-color);
+  --p-inputtext-invalid-placeholder-color: var(--p-inputtext-placeholder-color);
+  --p-textarea-invalid-border-color: var(--p-textarea-border-color);
+  --p-textarea-invalid-placeholder-color: var(--p-textarea-placeholder-color);
+
+  display: grid;
+  gap: 1.125rem;
+  padding: 1.5rem 1.25rem;
+  background: var(--p-content-background);
+  border: 1px solid var(--p-content-border-color);
+  border-radius: var(--pf-radius);
+  box-shadow: var(--pf-shadow-sm);
+}
+
+h3 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.375rem;
+
+  input,
+  textarea {
+    width: 100%;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+}
+
+.field.invalid {
+  --p-inputtext-invalid-border-color: var(--p-red-400);
+  --p-textarea-invalid-border-color: var(--p-red-400);
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.error {
+  color: var(--p-red-600);
+}
+
+.notice {
+  margin: 0;
+  padding: 0.625rem 0.875rem;
+  background: var(--p-surface-50);
+  border-radius: var(--pf-radius-sm);
+  color: var(--p-text-muted-color);
+  font-size: 0.8125rem;
+}
+
+.submit {
+  justify-self: start;
+}

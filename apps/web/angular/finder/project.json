@@ -1,0 +1,68 @@
+{
+  "name": "finder",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "pf",
+  "sourceRoot": "apps/web/angular/finder/src",
+  "tags": ["platform:web", "type:app"],
+  "targets": {
+    "build": {
+      "executor": "@angular/build:application",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/apps/finder",
+        "browser": "apps/web/angular/finder/src/main.ts",
+        "polyfills": [],
+        "tsConfig": "apps/web/angular/finder/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/web/angular/finder/public"
+          }
+        ],
+        "styles": ["apps/web/angular/finder/src/styles.scss"]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "700kB",
+              "maximumError": "1MB"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "4kB",
+              "maximumError": "8kB"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      }
+    },
+    "serve": {
+      "continuous": true,
+      "executor": "@angular/build:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "proxyConfig": "apps/web/angular/finder/proxy.conf.json",
+        "port": 4200
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "finder:build:production"
+        },
+        "development": {
+          "buildTarget": "finder:build:development"
+        }
+      }
+    }
+  }
+}

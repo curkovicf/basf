@@ -1,0 +1,16 @@
+.product-list {
+  display: grid;
+  gap: 0.875rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+  transition:
+    opacity 0.2s,
+    filter 0.2s;
+
+  &.dimmed {
+    opacity: 0.55;
+    filter: saturate(0.7);
+    pointer-events: none;
+  }
+}

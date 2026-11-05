@@ -1,0 +1,13 @@
+{
+  "name": "web-finder-shared-testing",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/finder/shared/testing/src",
+  "projectType": "library",
+  "prefix": "pf",
+  "tags": [
+    "platform:web",
+    "type:util"
+  ],
+  "// targets": "to see all targets run: nx show project web-finder-shared-testing --web",
+  "targets": {}
+}

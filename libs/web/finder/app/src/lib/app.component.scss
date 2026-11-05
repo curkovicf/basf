@@ -1,0 +1,121 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  &:focus {
+    left: 1rem;
+    top: 0.5rem;
+    z-index: 30;
+    padding: 0.5rem 0.75rem;
+    background: #fff;
+    border-radius: var(--pf-radius-sm);
+    box-shadow: var(--pf-shadow-md);
+  }
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(120deg, var(--p-primary-900), var(--p-primary-700));
+  box-shadow:
+    0 1px 0 rgb(255 255 255 / 8%) inset,
+    0 4px 18px rgb(15 23 42 / 18%);
+}
+
+.app-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 76rem;
+  height: var(--pf-header-height);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  color: #fff;
+  font-size: 1.0625rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.88;
+  }
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  background: rgb(255 255 255 / 14%);
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: 0.625rem;
+  transition: transform 0.35s var(--pf-ease);
+
+  .brand:hover & {
+    transform: rotate(-8deg) scale(1.06);
+  }
+}
+
+.tagline {
+  display: none;
+  color: rgb(255 255 255 / 72%);
+  font-size: 0.8125rem;
+
+  @media (min-width: 640px) {
+    display: inline;
+  }
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 2rem;
+}
+
+.app-footer {
+  min-height: 2.75rem;
+  padding: 0.875rem 1rem;
+  color: var(--p-text-muted-color);
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.fresh {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--p-green-500);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 color-mix(in srgb, var(--p-green-500) 55%, transparent);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  70% {
+    box-shadow: 0 0 0 0.45rem transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}

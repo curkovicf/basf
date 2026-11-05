@@ -1,0 +1,59 @@
+<form novalidate (submit)="$event.preventDefault(); submit()">
+  <h3>Write a review</h3>
+
+  <div class="field" [class.invalid]="showError('rating')">
+    <span id="rating-label" class="label">Your rating</span>
+    <p-rating [formField]="form.rating" aria-labelledby="rating-label" />
+
+    @if (showError('rating')) {
+      <small class="error" animate.enter="pf-fade">Please choose a rating from 1 to 5 stars.</small>
+    }
+  </div>
+
+  <div class="field" [class.invalid]="showError('authorName')">
+    <label class="label" for="review-author">Display name</label>
+    <input pInputText id="review-author" [formField]="form.authorName" autocomplete="nickname" />
+
+    @if (showError('authorName')) {
+      <small class="error" animate.enter="pf-fade"
+        >Please enter a name of at least 2 characters.</small
+      >
+    }
+  </div>
+
+  <div class="field" [class.invalid]="showError('comment')">
+    <label class="label" for="review-comment">Your experience</label>
+    <textarea pTextarea id="review-comment" rows="4" [formField]="form.comment"></textarea>
+
+    @if (showError('comment')) {
+      <small class="error" animate.enter="pf-fade">Please write at least 10 characters.</small>
+    }
+  </div>
+
+  <p class="notice">
+    Reviews are public and appear immediately. Please don't include personal data or confidential
+    details such as formulations.
+  </p>
+
+  <div aria-live="polite">
+    @if (status() === 'error' && errorMessage(); as message) {
+      <p-message severity="error" animate.enter="pf-enter">{{ message }}</p-message>
+    }
+
+    @if (status() === 'success') {
+      <p-message severity="success" animate.enter="pf-enter">
+        Thanks! Your review has been published.
+      </p-message>
+    }
+  </div>
+
+  <button pButton class="submit" type="submit" [disabled]="status() === 'submitting'">
+    <i
+      class="pi"
+      [class.pi-spinner]="status() === 'submitting'"
+      [class.pi-spin]="status() === 'submitting'"
+      [class.pi-send]="status() !== 'submitting'"
+    ></i>
+    Publish review
+  </button>
+</form>

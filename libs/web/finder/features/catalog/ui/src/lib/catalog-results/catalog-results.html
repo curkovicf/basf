@@ -1,0 +1,25 @@
+@if (failed()) {
+  <pf-load-error message="We couldn't load products. Please try again." (retry)="retry.emit()" />
+} @else if (result(); as current) {
+  @if (hiddenDiscontinued() > 0) {
+    <pf-discontinued-hint [count]="hiddenDiscontinued()" (show)="showDiscontinued.emit()" />
+  }
+
+  @if (current.items.length === 0) {
+    <pf-empty-results [canClearFilters]="canClearFilters()" (clearFilters)="clearFilters.emit()" />
+  } @else {
+    <pf-product-list [products]="current.items" [dimmed]="loading()" />
+
+    @if (current.total > pageSize()) {
+      <p-paginator
+        [first]="firstRow()"
+        [rows]="pageSize()"
+        [totalRecords]="current.total"
+        [pageLinkSize]="compact() ? 3 : 5"
+        (onPageChange)="onPage($event)"
+      />
+    }
+  }
+} @else {
+  <pf-product-list [products]="null" />
+}

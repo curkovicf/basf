@@ -1,0 +1,100 @@
+.back {
+  display: inline-flex;
+  margin: 0 0 1rem -0.5rem;
+}
+
+.loading {
+  display: grid;
+  gap: 0.875rem;
+  padding: 1.5rem;
+  background: var(--p-content-background);
+  border: 1px solid var(--p-content-border-color);
+  border-radius: var(--pf-radius);
+}
+
+.state {
+  padding: 3.5rem 1rem;
+  background: var(--p-content-background);
+  border: 1px dashed var(--p-surface-300);
+  border-radius: var(--pf-radius);
+  text-align: center;
+
+  .pi {
+    color: var(--p-primary-color);
+    font-size: 2rem;
+  }
+
+  h1 {
+    margin: 0.75rem 0 0.25rem;
+    font-size: 1.375rem;
+  }
+
+  p {
+    margin: 0 0 1rem;
+    color: var(--p-text-muted-color);
+  }
+}
+
+.product {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem 1.25rem;
+  overflow: hidden;
+  background: var(--p-content-background);
+  border: 1px solid var(--p-content-border-color);
+  border-radius: calc(var(--pf-radius) + 0.25rem);
+  box-shadow: var(--pf-shadow-sm);
+
+  // A thin brand-coloured edge along the top gives the page a clear starting point.
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, var(--p-primary-700), var(--p-primary-300));
+  }
+
+  @media (min-width: 720px) {
+    padding: 2rem;
+  }
+}
+
+.description {
+  max-width: 46rem;
+  margin: 0;
+  color: var(--p-text-color);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+.reviews {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin: 0;
+    font-size: 1.375rem;
+  }
+
+  .total {
+    padding: 0.125rem 0.6rem;
+    background: color-mix(in srgb, var(--p-primary-color) 12%, transparent);
+    border-radius: 1rem;
+    color: var(--p-primary-700);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+}
+
+.closed {
+  margin: 0;
+  padding: 0.875rem 1rem;
+  background: var(--p-surface-100);
+  border-radius: var(--pf-radius-sm);
+  color: var(--p-text-muted-color);
+}

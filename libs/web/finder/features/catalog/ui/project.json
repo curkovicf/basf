@@ -1,0 +1,13 @@
+{
+  "name": "web-finder-features-catalog-ui",
+  "$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/finder/features/catalog/ui/src",
+  "projectType": "library",
+  "prefix": "pf",
+  "tags": [
+    "platform:web",
+    "type:ui"
+  ],
+  "// targets": "to see all targets run: nx show project web-finder-features-catalog-ui --web",
+  "targets": {}
+}

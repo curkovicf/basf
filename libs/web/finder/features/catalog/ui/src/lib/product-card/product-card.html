@@ -1,0 +1,51 @@
+<article class="card">
+  <header>
+    <div class="title">
+      <h3>
+        <a [routerLink]="['/products', product().sku]">{{ product().name }}</a>
+      </h3>
+      <p class="chemical">{{ product().chemicalName }} · {{ product().sku }}</p>
+    </div>
+
+    <pf-status-tag [status]="product().status" />
+  </header>
+
+  <dl>
+    <div>
+      <dt>Function</dt>
+      <dd>{{ product().function }}</dd>
+    </div>
+
+    <div>
+      <dt>Application</dt>
+      <dd>{{ product().applicationArea }}</dd>
+    </div>
+
+    <div>
+      <dt>Region</dt>
+      <dd>{{ product().region }}</dd>
+    </div>
+
+    <div>
+      <dt>Launched</dt>
+      <dd>{{ product().launchYear ?? 'Unknown' }}</dd>
+    </div>
+  </dl>
+
+  <footer>
+    <pf-rating-badge [rating]="product().rating" />
+
+    @if (product().certifications.length > 0) {
+      <ul class="certifications" aria-label="Certifications">
+        @for (certification of product().certifications; track certification) {
+          <li>{{ certification }}</li>
+        }
+      </ul>
+    }
+
+    <span class="open" aria-hidden="true">
+      View details
+      <span class="pi pi-arrow-right"></span>
+    </span>
+  </footer>
+</article>

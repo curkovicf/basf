@@ -1,0 +1,22 @@
+<header>
+  <div class="title">
+    <h1>{{ product().name }}</h1>
+    <p class="chemical">{{ product().chemicalName }}</p>
+  </div>
+
+  <div class="actions">
+    <pf-status-tag [status]="product().status" />
+
+    <button
+      pButton
+      type="button"
+      severity="secondary"
+      [outlined]="true"
+      size="small"
+      (click)="share.emit()"
+    >
+      <i class="pi pi-share-alt"></i>
+      Share
+    </button>
+  </div>
+</header>

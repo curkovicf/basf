@@ -1,0 +1,142 @@
+@import 'primeicons/primeicons.css';
+
+// Design tokens shared by every component. Colours come from the PrimeNG theme
+// (`--p-primary-*`, `--p-surface-*`), so a theme change recolours the whole app.
+:root {
+  --pf-radius: 0.875rem;
+  --pf-radius-sm: 0.5rem;
+  --pf-shadow-sm: 0 1px 2px rgb(15 23 42 / 6%), 0 1px 3px rgb(15 23 42 / 5%);
+  --pf-shadow-md: 0 6px 16px rgb(15 23 42 / 9%), 0 2px 4px rgb(15 23 42 / 5%);
+  --pf-shadow-lg: 0 16px 36px rgb(15 23 42 / 14%), 0 4px 10px rgb(15 23 42 / 6%);
+  --pf-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --pf-star: #f59e0b;
+  --pf-header-height: 3.5rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      60rem 28rem at 12% -8rem,
+      color-mix(in srgb, var(--p-primary-200) 38%, transparent),
+      transparent
+    ),
+    var(--p-surface-50);
+  background-attachment: fixed;
+  color: var(--p-text-color);
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.015em;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--p-primary-color) 24%, transparent);
+}
+
+// Motion. Components opt in with `animate.enter="pf-enter"` / `animate.leave="pf-leave"`, which
+// Angular applies as classes when an element is created or removed. The rules live here
+// because the classes are added to elements of many components.
+@keyframes pf-enter {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+@keyframes pf-leave {
+  to {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+}
+
+@keyframes pf-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.pf-enter {
+  animation: pf-enter 0.45s var(--pf-ease) backwards;
+  // Lists set --pf-i per item, so cards arrive one after another instead of all at once.
+  animation-delay: calc(min(var(--pf-i, 0), 8) * 45ms);
+}
+
+.pf-leave {
+  animation: pf-leave 0.18s ease-in forwards;
+}
+
+.pf-fade {
+  animation: pf-fade 0.4s ease-out backwards;
+}
+
+// Page changes cross-fade through the View Transitions API (see `withViewTransitions`).
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.28s;
+  animation-timing-function: ease;
+}
+
+// Visible keyboard focus everywhere, without a ring on mouse clicks.
+:focus-visible {
+  outline: 2px solid var(--p-primary-color);
+  outline-offset: 2px;
+}
+
+// Rendered by PrimeNG outside component style scope.
+.p-paginator {
+  background: transparent;
+}
+
+.filter-drawer.p-drawer {
+  height: 85dvh;
+  border-top-left-radius: 1.25rem;
+  border-top-right-radius: 1.25rem;
+}
+
+// Keeps the drawer's main action clear of PrimeUI's corner notice while no licence key is
+// set. The notice itself must stay: the licence forbids removing it.
+.filter-drawer .p-drawer-footer {
+  padding-bottom: 4.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    // Near zero rather than none, so animationend still fires and removed elements leave.
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

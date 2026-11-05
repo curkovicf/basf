@@ -1,0 +1,33 @@
+@if (failed()) {
+  <pf-load-error message="We couldn't load reviews." (retry)="retry.emit()" />
+}
+
+<ul class="review-list">
+  @for (review of reviews(); track review.id) {
+    <li animate.enter="pf-enter"><pf-review-card [review]="review" /></li>
+  } @empty {
+    @if (!loading() && !failed()) {
+      <li class="none">No reviews yet. Be the first to share your experience.</li>
+    }
+  }
+</ul>
+
+@if (hasMore()) {
+  <button
+    pButton
+    class="more"
+    type="button"
+    severity="secondary"
+    [outlined]="true"
+    [disabled]="loading()"
+    (click)="loadMore.emit()"
+  >
+    <i
+      class="pi"
+      [class.pi-spinner]="loading()"
+      [class.pi-spin]="loading()"
+      [class.pi-chevron-down]="!loading()"
+    ></i>
+    Show more reviews
+  </button>
+}

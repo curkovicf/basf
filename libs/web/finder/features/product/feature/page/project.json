@@ -1,0 +1,13 @@
+{
+  "name": "web-finder-features-product-feature-page",
+  "$schema": "../../../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/finder/features/product/feature/page/src",
+  "projectType": "library",
+  "prefix": "pf",
+  "tags": [
+    "platform:web",
+    "type:feature"
+  ],
+  "// targets": "to see all targets run: nx show project web-finder-features-product-feature-page --web",
+  "targets": {}
+}

@@ -1,0 +1,40 @@
+<div class="panel-header">
+  <h2>Filters</h2>
+
+  @if (activeFilterCount(query()) > 0) {
+    <button
+      pButton
+      type="button"
+      [text]="true"
+      size="small"
+      animate.enter="pf-fade"
+      (click)="cleared.emit()"
+    >
+      Clear all
+    </button>
+  }
+</div>
+
+@for (group of groups; track group.key) {
+  <fieldset>
+    <legend>{{ group.title }}</legend>
+
+    @if (group.hint) {
+      <p class="hint">{{ group.hint }}</p>
+    }
+
+    @for (option of facets()[group.key]; track option.value) {
+      <div class="option" [class.selected]="isSelected(group.key, option.value)">
+        <p-checkbox
+          [binary]="true"
+          [inputId]="group.key + '-' + option.value"
+          [ngModel]="isSelected(group.key, option.value)"
+          (onChange)="toggled.emit({ group: group.key, value: option.value })"
+        />
+
+        <label [for]="group.key + '-' + option.value">{{ label(group.key, option.value) }}</label>
+        <span class="count">{{ option.count }}</span>
+      </div>
+    }
+  </fieldset>
+}

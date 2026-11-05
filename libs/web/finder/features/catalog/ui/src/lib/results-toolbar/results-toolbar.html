@@ -1,0 +1,31 @@
+<p class="total" role="status">
+  @if (total(); as count) {
+    <strong>{{ count }}</strong> {{ count === 1 ? 'product' : 'products' }}
+  } @else if (total() === 0) {
+    <strong>0</strong> products
+  }
+</p>
+
+<div class="controls">
+  @if (filterButton()) {
+    <button
+      pButton
+      type="button"
+      severity="secondary"
+      [outlined]="true"
+      (click)="openFilters.emit()"
+    >
+      <i class="pi pi-sliders-h"></i>
+      {{ activeFilterCount() ? 'Filters (' + activeFilterCount() + ')' : 'Filters' }}
+    </button>
+  }
+
+  <p-select
+    ariaLabel="Sort results"
+    optionLabel="label"
+    optionValue="value"
+    [options]="sortOptions()"
+    [ngModel]="sort()"
+    (onChange)="sortChange.emit($event.value)"
+  />
+</div>

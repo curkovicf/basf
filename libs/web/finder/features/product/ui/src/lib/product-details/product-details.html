@@ -1,0 +1,35 @@
+<dl>
+  <div>
+    <dt>SKU</dt>
+    <dd>{{ product().sku }}</dd>
+  </div>
+
+  <div>
+    <dt>Function</dt>
+    <dd>{{ product().function }}</dd>
+  </div>
+
+  <div>
+    <dt>Application area</dt>
+    <dd>{{ product().applicationArea }}</dd>
+  </div>
+
+  <div>
+    <dt>Region</dt>
+    <dd>{{ product().region }}</dd>
+  </div>
+
+  <div>
+    <dt>Launch year</dt>
+    <dd>{{ product().launchYear ?? 'Unknown' }}</dd>
+  </div>
+
+  <div>
+    <dt>Certifications</dt>
+    <dd>
+      {{
+        product().certifications.length > 0 ? product().certifications.join(', ') : 'None listed'
+      }}
+    </dd>
+  </div>
+</dl>

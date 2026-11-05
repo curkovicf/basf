@@ -1,0 +1,15 @@
+<article class="review">
+  <span class="avatar" aria-hidden="true">{{ initial() }}</span>
+
+  <div class="body">
+    <div class="meta">
+      <strong>{{ review().authorName }}</strong>
+      <pf-review-stars [rating]="review().rating" />
+      <time [attr.datetime]="review().createdAt">{{
+        review().createdAt | date: 'mediumDate'
+      }}</time>
+    </div>
+
+    <p>{{ review().comment }}</p>
+  </div>
+</article>

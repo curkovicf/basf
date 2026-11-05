@@ -1,0 +1,13 @@
+{
+  "name": "web-finder-shared-data-access",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/finder/shared/data-access/src",
+  "projectType": "library",
+  "prefix": "pf",
+  "tags": [
+    "platform:web",
+    "type:data-access"
+  ],
+  "// targets": "to see all targets run: nx show project web-finder-shared-data-access --web",
+  "targets": {}
+}

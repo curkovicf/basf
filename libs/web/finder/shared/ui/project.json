@@ -1,0 +1,13 @@
+{
+  "name": "web-finder-shared-ui",
+  "$schema": "../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/web/finder/shared/ui/src",
+  "projectType": "library",
+  "prefix": "pf",
+  "tags": [
+    "platform:web",
+    "type:ui"
+  ],
+  "// targets": "to see all targets run: nx show project web-finder-shared-ui --web",
+  "targets": {}
+}
