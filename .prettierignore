@@ -1,0 +1,7 @@
+/dist
+/coverage
+/.nx
+/.angular
+/node_modules
+**/prisma/generated
+**/migrations/*.sql

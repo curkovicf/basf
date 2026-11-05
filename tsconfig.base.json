@@ -1,0 +1,130 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "importHelpers": true,
+    "target": "es2022",
+    "module": "esnext",
+    "lib": [
+      "es2023",
+      "dom"
+    ],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "baseUrl": ".",
+    "paths": {
+      "@pf/server-nodejs-api-features-catalog-api": [
+        "libs/server/nodejs/api/features/catalog/api/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-catalog-application": [
+        "libs/server/nodejs/api/features/catalog/application/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-catalog-domain": [
+        "libs/server/nodejs/api/features/catalog/domain/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-catalog-import-api": [
+        "libs/server/nodejs/api/features/catalog-import/api/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-catalog-import-application": [
+        "libs/server/nodejs/api/features/catalog-import/application/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-catalog-import-domain": [
+        "libs/server/nodejs/api/features/catalog-import/domain/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-catalog-import-infrastructure": [
+        "libs/server/nodejs/api/features/catalog-import/infrastructure/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-catalog-import-shell": [
+        "libs/server/nodejs/api/features/catalog-import/shell/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-catalog-infrastructure": [
+        "libs/server/nodejs/api/features/catalog/infrastructure/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-catalog-shell": [
+        "libs/server/nodejs/api/features/catalog/shell/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-health-api": [
+        "libs/server/nodejs/api/features/health/api/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-health-domain": [
+        "libs/server/nodejs/api/features/health/domain/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-health-infrastructure": [
+        "libs/server/nodejs/api/features/health/infrastructure/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-health-shell": [
+        "libs/server/nodejs/api/features/health/shell/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-reviews-api": [
+        "libs/server/nodejs/api/features/reviews/api/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-reviews-application": [
+        "libs/server/nodejs/api/features/reviews/application/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-reviews-domain": [
+        "libs/server/nodejs/api/features/reviews/domain/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-reviews-infrastructure": [
+        "libs/server/nodejs/api/features/reviews/infrastructure/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-features-reviews-shell": [
+        "libs/server/nodejs/api/features/reviews/shell/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-shared-infrastructure": [
+        "libs/server/nodejs/api/shared/infrastructure/src/index.ts"
+      ],
+      "@pf/server-nodejs-api-shell": [
+        "libs/server/nodejs/api/shell/src/index.ts"
+      ],
+      "@pf/shared-types": [
+        "libs/shared/types/src/index.ts"
+      ],
+      "@pf/web-finder-app": [
+        "libs/web/finder/app/src/index.ts"
+      ],
+      "@pf/web-finder-features-catalog-feature-page": [
+        "libs/web/finder/features/catalog/feature/page/src/index.ts"
+      ],
+      "@pf/web-finder-features-catalog-feature-shell": [
+        "libs/web/finder/features/catalog/feature/shell/src/index.ts"
+      ],
+      "@pf/web-finder-features-catalog-ui": [
+        "libs/web/finder/features/catalog/ui/src/index.ts"
+      ],
+      "@pf/web-finder-features-catalog-util": [
+        "libs/web/finder/features/catalog/util/src/index.ts"
+      ],
+      "@pf/web-finder-features-product-feature-page": [
+        "libs/web/finder/features/product/feature/page/src/index.ts"
+      ],
+      "@pf/web-finder-features-product-feature-shell": [
+        "libs/web/finder/features/product/feature/shell/src/index.ts"
+      ],
+      "@pf/web-finder-features-product-ui": [
+        "libs/web/finder/features/product/ui/src/index.ts"
+      ],
+      "@pf/web-finder-shared-data-access": [
+        "libs/web/finder/shared/data-access/src/index.ts"
+      ],
+      "@pf/web-finder-shared-testing": [
+        "libs/web/finder/shared/testing/src/index.ts"
+      ],
+      "@pf/web-finder-shared-ui": [
+        "libs/web/finder/shared/ui/src/index.ts"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "tmp",
+    "dist"
+  ]
+}
